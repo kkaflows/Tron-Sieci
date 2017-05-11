@@ -5,11 +5,13 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.*;
 import project.MainAppClient;
 import project.model.DataPackage;
 
 import javax.xml.crypto.Data;
 import java.awt.*;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -53,6 +55,8 @@ public class ClientController {
         dataPackage = new DataPackage(0, 200, 1, 0);
         bufferedImage = new BufferedImage(400, 400, BufferedImage.TYPE_INT_RGB);
         graphicsContext = canvas.getGraphicsContext2D();
+
+        initDraw(graphicsContext);
     }
 
     @FXML
@@ -60,8 +64,9 @@ public class ClientController {
         dataPackage.goUp();
 
         dataPackage.nextStep();
-        bufferedImage.setRGB(dataPackage.getX(), dataPackage.getY(), Color.YELLOW.getRGB());
-        graphicsContext.drawImage(SwingFXUtils.toFXImage(bufferedImage, null), 0, 0);
+//        bufferedImage.setRGB(dataPackage.getX(), dataPackage.getY(), Color.YELLOW.getRGB());
+//        graphicsContext.drawImage(SwingFXUtils.toFXImage(bufferedImage, null), 0, 0);
+        graphicsContext.fillOval(dataPackage.getX(), dataPackage.getY(), 5,5);
     }
 
     @FXML
@@ -69,8 +74,9 @@ public class ClientController {
         dataPackage.goRight();
 
         dataPackage.nextStep();
-        bufferedImage.setRGB(dataPackage.getX(), dataPackage.getY(), Color.YELLOW.getRGB());
-        graphicsContext.drawImage(SwingFXUtils.toFXImage(bufferedImage, null), 0, 0);
+//        bufferedImage.setRGB(dataPackage.getX(), dataPackage.getY(), Color.YELLOW.getRGB());
+//        graphicsContext.drawImage(SwingFXUtils.toFXImage(bufferedImage, null), 0, 0);
+        graphicsContext.fillOval(dataPackage.getX(), dataPackage.getY(), 5,5);
     }
 
     @FXML
@@ -78,8 +84,9 @@ public class ClientController {
         dataPackage.goDown();
 
         dataPackage.nextStep();
-        bufferedImage.setRGB(dataPackage.getX(), dataPackage.getY(), Color.YELLOW.getRGB());
-        graphicsContext.drawImage(SwingFXUtils.toFXImage(bufferedImage, null), 0, 0);
+//        bufferedImage.setRGB(dataPackage.getX(), dataPackage.getY(), Color.YELLOW.getRGB());
+//        graphicsContext.drawImage(SwingFXUtils.toFXImage(bufferedImage, null), 0, 0);
+        graphicsContext.fillOval(dataPackage.getX(), dataPackage.getY(), 5,5);
     }
 
     @FXML
@@ -87,8 +94,9 @@ public class ClientController {
         dataPackage.goLeft();
 
         dataPackage.nextStep();
-        bufferedImage.setRGB(dataPackage.getX(), dataPackage.getY(), Color.YELLOW.getRGB());
-        graphicsContext.drawImage(SwingFXUtils.toFXImage(bufferedImage, null), 0, 0);
+//        bufferedImage.setRGB(dataPackage.getX(), dataPackage.getY(), Color.YELLOW.getRGB());
+//        graphicsContext.drawImage(SwingFXUtils.toFXImage(bufferedImage, null), 0, 0);
+        graphicsContext.fillOval(dataPackage.getX(), dataPackage.getY(), 5,5);
     }
 
     @FXML
@@ -137,6 +145,26 @@ public class ClientController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void initDraw(GraphicsContext gc) {
+        double canvasWidth = gc.getCanvas().getWidth();
+        double canvasHeight = gc.getCanvas().getHeight();
+
+        gc.setFill(javafx.scene.paint.Color.LIGHTGRAY);
+        gc.setStroke(javafx.scene.paint.Color.BLACK);
+        gc.setLineWidth(5);
+
+        gc.fill();
+        gc.strokeRect(
+                0,              //x of the upper left corner
+                0,              //y of the upper left corner
+                canvasWidth,    //width of the rectangle
+                canvasHeight);  //height of the rectangle
+
+        gc.setFill(javafx.scene.paint.Color.RED);
+        gc.setStroke(javafx.scene.paint.Color.BLUE);
+        gc.setLineWidth(1);
     }
 
 }

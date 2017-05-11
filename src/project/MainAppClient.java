@@ -47,23 +47,11 @@ public class MainAppClient extends Application {
             ClientController controller = loader.getController();
             controller.setMainAppClient(this);
 
-            Thread move = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    while(true){
-                        controller.move();
-                        try {
-                            Thread.sleep(100);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            });
-            move.start();
+
 
             ClientReceiveThread clientReceiveThread = new ClientReceiveThread(controller.objectOutputStream, controller.objectInputStream, controller.graphicsContext);
             clientReceiveThread.start();
+
 
 
         } catch (IOException e) {
