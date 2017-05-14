@@ -1,15 +1,18 @@
 package project.view;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
 import javafx.scene.paint.*;
 import project.MainAppClient;
+import project.MainAppServer;
 import project.model.DataPackage;
 
-import javax.xml.crypto.Data;
+
 import java.awt.*;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -18,9 +21,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-/**
- * Created by Lenovo on 2017-05-11.
- */
 public class ClientController {
 
     public DataPackage dataPackage;
@@ -30,10 +30,12 @@ public class ClientController {
     public ObjectOutputStream objectOutputStream;
     public GraphicsContext graphicsContext;
     public BufferedImage bufferedImage;
+    public static boolean[][] board = new boolean[400][400];
 
 
     public void setMainAppClient(MainAppClient mainAppClient) {
         this.mainAppClient = mainAppClient;
+
     }
 
     @FXML
@@ -74,6 +76,7 @@ public class ClientController {
         dataPackage.goRight();
 
         dataPackage.nextStep();
+
 //        bufferedImage.setRGB(dataPackage.getX(), dataPackage.getY(), Color.YELLOW.getRGB());
 //        graphicsContext.drawImage(SwingFXUtils.toFXImage(bufferedImage, null), 0, 0);
         graphicsContext.fillOval(dataPackage.getX(), dataPackage.getY(), 5,5);
@@ -101,18 +104,18 @@ public class ClientController {
 
     @FXML
     private void handleButtonStart(){
-        try {
-            objectOutputStream.writeObject("start");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            objectOutputStream.writeObject("start");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         Thread move = new Thread(new Runnable() {
             @Override
             public void run() {
                 while(true){
                     move();
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(40);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -135,11 +138,14 @@ public class ClientController {
         if (dataPackage.getDirY() == -1)
             handleButtonUp();
 
-        dataPackage.setBoard(dataPackage.getX(), dataPackage.getY());
+//        isLooser();
+
+
+        board[dataPackage.getX()][dataPackage.getY()] = true;
 
         try {
             DataPackage tmp = new DataPackage(dataPackage.getX(), dataPackage.getY(),dataPackage.getDirX(),dataPackage.getDirY());
-            System.out.println(dataPackage.getX());
+            //System.out.println(dataPackage.getX());
             objectOutputStream.writeObject(tmp);
             objectOutputStream.flush();
         } catch (IOException e) {
@@ -165,6 +171,39 @@ public class ClientController {
         gc.setFill(javafx.scene.paint.Color.RED);
         gc.setStroke(javafx.scene.paint.Color.BLUE);
         gc.setLineWidth(1);
+    }
+
+    @FXML
+    private void handleButtonPlayerOne(){
+
+        dataPackage = new DataPackage(0, 200, 1, 0);
+        graphicsContext.setFill(javafx.scene.paint.Color.RED);
+    }
+
+    @FXML
+    private void handleButtonPlayerTwo(){
+        dataPackage = new DataPackage(400, 200, -1, 0);
+        graphicsContext.setFill(javafx.scene.paint.Color.BLUE);
+    }
+
+    private void isLooser(){
+        if(board[dataPackage.getX()][dataPackage.getY()] == true){
+//            Platform.runLater(new Runnable() {
+//                @Override
+//                public void run() {
+//
+//                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//                    alert.setTitle("You lost");
+//                    alert.setHeaderText("You lost!");
+//                    alert.setContentText("You lost!");
+//                    alert.showAndWait();
+//                }
+//            });
+            while(true)
+            System.out.println("you lost");
+
+        }
+
     }
 
 }

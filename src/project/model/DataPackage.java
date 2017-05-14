@@ -8,24 +8,17 @@ import java.io.Serializable;
 public class DataPackage implements Serializable {
     private int x, y;
     private int dirX, dirY;
-    private boolean[][] board;
+
 
     public DataPackage(int x, int y, int dirX, int dirY) {
         this.x = x;
         this.y = y;
         this.dirX = dirX;
         this.dirY = dirY;
-        this.board = new boolean[400][400];
-        clearBoard();
+
     }
 
-    private void clearBoard(){
-        for (int i = 0; i < 400; i++) {
-            for (int j = 0; j < 400; j++) {
-                board[i][j] = false;
-            }
-        }
-    }
+
 
     public void nextStep(){
         x +=dirX;
@@ -51,13 +44,7 @@ public class DataPackage implements Serializable {
         dirY = 0;
     }
 
-    public boolean[][] getBoard() {
-        return board;
-    }
 
-    public void setBoard(boolean[][] board) {
-        this.board = board;
-    }
 
     public int getX() {
         return x;
@@ -91,7 +78,5 @@ public class DataPackage implements Serializable {
         this.dirY = dirY;
     }
 
-    public void setBoard(int x, int y) {
-        board[x][y] = true;
-    }
+
 }

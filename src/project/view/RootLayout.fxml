@@ -12,5 +12,7 @@
       <Button layoutX="445.0" layoutY="167.0" mnemonicParsing="false" onAction="#handleButtonLeft" text="Left" />
       <Button layoutX="498.0" layoutY="244.0" mnemonicParsing="false" onAction="#handleButtonDown" text="Down" />
       <Button layoutX="498.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleButtonStart" text="Start" />
+      <Button layoutX="463.0" layoutY="392.0" mnemonicParsing="false" onAction="#handleButtonPlayerOne" text="PlayerOne" />
+      <Button layoutX="464.0" layoutY="445.0" mnemonicParsing="false" onAction="#handleButtonPlayerTwo" text="PlayerTwo" />
    </children>
 </AnchorPane>

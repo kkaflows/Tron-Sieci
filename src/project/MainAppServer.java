@@ -17,7 +17,10 @@ public class MainAppServer {
     static ArrayList<Socket> socketList;
 
 
+
     public static void main(String[] args) {
+
+
         try {
             serverSocket = new ServerSocket(4444);
 
@@ -42,6 +45,8 @@ public class MainAppServer {
 
         }
     }
+
+
 
 }
 

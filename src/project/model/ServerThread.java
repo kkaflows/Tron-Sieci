@@ -23,8 +23,6 @@ public class ServerThread extends Thread {
 
     public ServerThread(Socket socket) {
         this.socket = socket;
-
-
     }
 
     @Override
@@ -56,11 +54,11 @@ public class ServerThread extends Thread {
                 if (o instanceof DataPackage) {
                     System.out.println("DataPackage");
                     DataPackage dataPackage = (DataPackage) o;
-                    history.add(dataPackage);
-                    System.out.println(dataPackage.getX());
+                    //history.add(dataPackage);
+                    //System.out.println(dataPackage.getX());
 
                     for (ObjectOutputStream outputStream : outputStreams) {
-                        if (outputStream != objectOutputStream)
+                        //if (outputStream != objectOutputStream)
                             outputStream.writeObject(dataPackage);
                     }
                 }

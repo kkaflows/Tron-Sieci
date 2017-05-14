@@ -18,6 +18,7 @@ public class MainAppClient extends Application {
     Stage primaryStage;
     AnchorPane rootLayout;
 
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         System.out.println("test");
