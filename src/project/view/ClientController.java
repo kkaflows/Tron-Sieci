@@ -6,7 +6,8 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.*;
 import project.MainAppClient;
 import project.MainAppServer;
@@ -31,6 +32,8 @@ public class ClientController {
     public GraphicsContext graphicsContext;
     public BufferedImage bufferedImage;
     public static boolean[][] board = new boolean[400][400];
+    public boolean isRunning = true;
+    private static int id = 0;
 
 
     public void setMainAppClient(MainAppClient mainAppClient) {
@@ -39,7 +42,10 @@ public class ClientController {
     }
 
     @FXML
-    private Canvas canvas;
+    public Canvas canvas;
+
+    @FXML
+    public TextField textField;
 
     @FXML
     private void initialize() {
@@ -54,7 +60,9 @@ public class ClientController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        dataPackage = new DataPackage(0, 200, 1, 0);
+//        if(id == 0)
+        dataPackage = new DataPackage(10, 200, 1, 0);
+//        if(id == 1) dataPackage = new DataPackage(10, 200, 1, 0);
         bufferedImage = new BufferedImage(400, 400, BufferedImage.TYPE_INT_RGB);
         graphicsContext = canvas.getGraphicsContext2D();
 
@@ -63,6 +71,7 @@ public class ClientController {
 
     @FXML
     private void handleButtonUp() {
+        if(dataPackage.getDirY() != 1)
         dataPackage.goUp();
 
         dataPackage.nextStep();
@@ -73,6 +82,7 @@ public class ClientController {
 
     @FXML
     private void handleButtonRight() {
+        if(dataPackage.getDirX() != -1)
         dataPackage.goRight();
 
         dataPackage.nextStep();
@@ -84,6 +94,7 @@ public class ClientController {
 
     @FXML
     private void handleButtonDown() {
+        if(dataPackage.getDirY() != -1)
         dataPackage.goDown();
 
         dataPackage.nextStep();
@@ -94,6 +105,7 @@ public class ClientController {
 
     @FXML
     private void handleButtonLeft() {
+        if(dataPackage.getDirX() != 1)
         dataPackage.goLeft();
 
         dataPackage.nextStep();
@@ -103,7 +115,7 @@ public class ClientController {
     }
 
     @FXML
-    private void handleButtonStart(){
+    public void handleButtonStart(){
 //        try {
 //            objectOutputStream.writeObject("start");
 //        } catch (IOException e) {
@@ -112,7 +124,7 @@ public class ClientController {
         Thread move = new Thread(new Runnable() {
             @Override
             public void run() {
-                while(true){
+                while(isRunning){
                     move();
                     try {
                         Thread.sleep(40);
@@ -182,7 +194,7 @@ public class ClientController {
 
     @FXML
     private void handleButtonPlayerTwo(){
-        dataPackage = new DataPackage(400, 200, -1, 0);
+        dataPackage = new DataPackage(390, 200, -1, 0);
         graphicsContext.setFill(javafx.scene.paint.Color.BLUE);
     }
 

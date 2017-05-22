@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import project.model.ClientReceiveThread;
+import project.model.ClientSendReceiveThread;
 import project.view.ClientController;
 
 import java.io.IOException;
@@ -48,10 +48,15 @@ public class MainAppClient extends Application {
             ClientController controller = loader.getController();
             controller.setMainAppClient(this);
 
+            ClientSendReceiveThread send = new ClientSendReceiveThread("send", controller);
+            send.start();
+
+            ClientSendReceiveThread receive = new ClientSendReceiveThread("receive", controller, controller.objectInputStream, controller.objectOutputStream);
+            receive.start();
 
 
-            ClientReceiveThread clientReceiveThread = new ClientReceiveThread(controller.objectOutputStream, controller.objectInputStream, controller.graphicsContext);
-            clientReceiveThread.start();
+//            ClientReceiveThread clientReceiveThread = new ClientReceiveThread(controller.objectOutputStream, controller.objectInputStream, controller.graphicsContext);
+//            clientReceiveThread.start();
 
 
 

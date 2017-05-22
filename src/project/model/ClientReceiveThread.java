@@ -55,9 +55,7 @@ public class ClientReceiveThread extends Thread {
                 if (o instanceof DataPackage) {
                     dataPackage = (DataPackage) o;
 
-                    if(isLooser()) {
-                        Thread.sleep(200000);
-                    }
+
                     board[dataPackage.getX()][dataPackage.getY()] = true;
 //                      System.out.println(board[dataPackage.getX()][dataPackage.getY()]);
 //                    bufferedImage.setRGB(dataPackage.getX(), dataPackage.getY(), Color.RED.getRGB());
@@ -76,8 +74,6 @@ public class ClientReceiveThread extends Thread {
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }

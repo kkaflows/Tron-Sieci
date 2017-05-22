@@ -67,7 +67,7 @@ public class ServerThread extends Thread {
                     String msg = (String) o;
                     System.out.println(msg);
                     for (ObjectOutputStream outputStream : outputStreams) {
-                        if (outputStream != objectOutputStream)
+                        //if (outputStream != objectOutputStream)
                             outputStream.writeObject(msg);
 
                     }
