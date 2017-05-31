@@ -2,19 +2,22 @@
 
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" prefWidth="652.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.view.ClientController">
    <children>
       <Canvas fx:id="canvas" height="400.0" layoutX="25.0" layoutY="57.0" width="400.0" />
-      <Button layoutX="508.0" layoutY="83.0" mnemonicParsing="false" onAction="#handleButtonUp" text="Up" />
+      <Button layoutX="454.0" layoutY="83.0" mnemonicParsing="false" onAction="#handleButtonUp" prefHeight="25.0" prefWidth="162.0" text="Up" />
       <Button layoutX="571.0" layoutY="167.0" mnemonicParsing="false" onAction="#handleButtonRight" text="Right" />
       <Button layoutX="445.0" layoutY="167.0" mnemonicParsing="false" onAction="#handleButtonLeft" text="Left" />
-      <Button layoutX="498.0" layoutY="244.0" mnemonicParsing="false" onAction="#handleButtonDown" text="Down" />
-      <Button layoutX="498.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleButtonStart" text="Start" />
-      <Button layoutX="463.0" layoutY="392.0" mnemonicParsing="false" onAction="#handleButtonPlayerOne" text="PlayerOne" />
-      <Button layoutX="464.0" layoutY="445.0" mnemonicParsing="false" onAction="#handleButtonPlayerTwo" text="PlayerTwo" />
-      <TextField fx:id="textField" layoutX="444.0" layoutY="45.0" />
+      <Button layoutX="440.0" layoutY="245.0" mnemonicParsing="false" onAction="#handleButtonDown" prefHeight="25.0" prefWidth="162.0" text="Down" />
+      <Button layoutX="498.0" layoutY="295.0" mnemonicParsing="false" onAction="#handleButtonStart" text="Start" />
+      <Button layoutX="483.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleButtonPlayerOne" text="PlayerOne" />
+      <Button layoutX="484.0" layoutY="378.0" mnemonicParsing="false" onAction="#handleButtonPlayerTwo" text="PlayerTwo" />
+      <TextField fx:id="address" layoutX="434.0" layoutY="431.0" />
+      <Label layoutX="476.0" layoutY="414.0" text="IP ADDRESS" />
+      <Button layoutX="489.0" layoutY="467.0" mnemonicParsing="false" onAction="#handleConnectButton" text="Connect" />
    </children>
 </AnchorPane>

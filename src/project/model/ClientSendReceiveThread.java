@@ -23,7 +23,6 @@ public class ClientSendReceiveThread extends Thread {
     private boolean[][] board = new boolean[400][400];
     private DataPackage dataPackage;
     private GraphicsContext graphicsContext;
-    private static int score = 0;
 
 
     public ClientSendReceiveThread(String name, ClientController controller) {
@@ -42,11 +41,11 @@ public class ClientSendReceiveThread extends Thread {
     @Override
     public void run() {
         if (name == "send") {
-            try {
-                Thread.sleep(7000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Thread.sleep(7000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
             while (isRunning) {
                 controller.move();
                 try {
@@ -72,16 +71,22 @@ public class ClientSendReceiveThread extends Thread {
                         dataPackage = (DataPackage) o;
                         boolean endRound = isWinner();
                         board[dataPackage.getX()][dataPackage.getY()] = true;
-                        //graphicsContext.setFill(Color.BLUE);
+                        graphicsContext.setFill(Color.BLUE);
+                        if(graphicsContext.getFill() != Color.GREEN)
                         graphicsContext.fillOval(dataPackage.getX(), dataPackage.getY(), 5, 5);
 
+
                         if (endRound == true) {
-                            score += 1;
-                            String tmp = "" + score;
-                            controller.textField.setText(tmp);
+                            //score += 1;
+                            //String tmp = "" + score;
+                            //controller.textField.setText(tmp);
                             graphicsContext.clearRect(5, 5, 390, 390);
                         }
                         dataPackage = null;
+                    }
+                    if(o instanceof String){
+                        String msg = (String) o;
+                        System.out.println(msg);
                     }
                 }
                 clearBoard();
